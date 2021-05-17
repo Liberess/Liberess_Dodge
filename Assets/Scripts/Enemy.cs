@@ -18,4 +18,13 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void Hit()
+    {
+        --hp;
+
+        GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
+
+        Destroy(blood, 1f);
+    }
 }

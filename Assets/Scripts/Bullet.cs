@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public bool isPlayer;
     private float moveSpeed = 8f;
 
     Rigidbody rigid;
 
     private void Start()
     {
+        isPlayer = false;
         rigid = GetComponent<Rigidbody>();
 
         Destroy(gameObject, 3f);
@@ -28,18 +30,26 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !isPlayer)
         {
-            //collision.GetComponent<PlayerCtrl>().hp -= 1;
-
             PlayerCtrl playerCtrl = collision.GetComponent<PlayerCtrl>();
 
             if(playerCtrl != null)
             {
                 playerCtrl.Hit();
-                //playerCtrl.Die();
                 Destroy(gameObject);
             }
         }
+
+        if(collision.CompareTag("Enemy") && isPlayer)
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+
+            if (enemy != null)
+            {
+                enemy.Hit();
+                Destroy(gameObject);
+            }
+        }    
     }
 }

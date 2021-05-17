@@ -24,12 +24,14 @@ public class FollowPlayer : MonoBehaviour
         camTransform = transform;
         cam = Camera.main;
     }
+
     private void Update()
     {
         currentX += Input.GetAxis("Mouse X") * sensitivityX;
         currentY -= Input.GetAxis("Mouse Y") * sensitivityY;
         currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
     }
+
     private void LateUpdate()
     {
         Vector3 dir = new Vector3(0, 0, -distance);

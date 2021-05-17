@@ -43,6 +43,7 @@ public class BulletSpawner : MonoBehaviour
                 spawnTimer = 0f;
 
                 GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, transform.rotation);
+                bullet.GetComponent<Bullet>().isPlayer = false;
                 bullet.transform.LookAt(target);
 
                 spawnRate = Random.Range(spawnRateMin, spawnRateMax);

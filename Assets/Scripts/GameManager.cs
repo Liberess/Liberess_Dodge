@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
             Time.timeScale = 1;
 
-            isPlay = false;
+            isPlay = true;
             isGameOver = false;
 
             scoreTxt.text = "점수 : " + score;

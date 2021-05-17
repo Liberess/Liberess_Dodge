@@ -7,6 +7,7 @@ public class PlayerCtrl : MonoBehaviour
 {
     public static PlayerCtrl Instance;
 
+    public GameObject gun;
     public GameObject cam;
     public Transform cameraArm;
 
@@ -65,6 +66,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         LookAround();
         Move2();
+        Shot();
     }
 
     private void Move()
@@ -142,6 +144,15 @@ public class PlayerCtrl : MonoBehaviour
             Destroy(blood, 1f);
 
             StartCoroutine(NoDamage());
+        }
+    }
+
+    private void Shot()
+    {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), gun.transform.position,Quaternion.identity);
+            bullet.GetComponent<Bullet>().isPlayer = true;
         }
     }
 
