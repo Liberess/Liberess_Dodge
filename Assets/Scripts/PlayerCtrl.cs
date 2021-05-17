@@ -18,6 +18,9 @@ public class PlayerCtrl : MonoBehaviour
 
     private float moveSpeed = 12f;
 
+    private float shotTime;
+    private float shotDelayTime = 1f;
+
     Rigidbody rigid;
 
     MeshRenderer mesh;
@@ -149,10 +152,18 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Shot()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(shotTime >= shotDelayTime)
         {
-            GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), gun.transform.position,Quaternion.identity);
-            bullet.GetComponent<Bullet>().isPlayer = true;
+            if (Input.GetButtonDown("Fire1"))
+            {
+                shotTime = 0;
+
+                GameObject bullet = Instantiate(Resources.Load<GameObject>("PlayerBullet"), gun.transform.position, Quaternion.identity);
+            }
+        }
+        else
+        {
+            shotTime += Time.deltaTime;
         }
     }
 

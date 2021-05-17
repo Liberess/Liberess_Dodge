@@ -8,6 +8,8 @@ public class BulletSpawner : MonoBehaviour
 
     private bool isShot;
 
+    private int health;
+
     private float spawnRateMin = 0.5f;
     private float spawnRateMax = 3f;
 
@@ -23,6 +25,8 @@ public class BulletSpawner : MonoBehaviour
     private void Start()
     {
         isShot = true;
+
+        health = 3;
         spawnTimer = 0f;
 
         spawnRate = Random.Range(spawnRateMin, spawnRateMax);
@@ -31,19 +35,28 @@ public class BulletSpawner : MonoBehaviour
 
     private void Update()
     {
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         if(PlayerCtrl.Instance.health <= 0)
         {
             isShot = false;
         }
 
-        if(isShot)
+        Shot();
+    }
+
+    private void Shot()
+    {
+        if (isShot)
         {
             if (spawnTimer >= spawnRate)
             {
                 spawnTimer = 0f;
 
-                GameObject bullet = Instantiate(Resources.Load<GameObject>("Bullet"), transform.position, transform.rotation);
-                bullet.GetComponent<Bullet>().isPlayer = false;
+                GameObject bullet = Instantiate(Resources.Load<GameObject>("EnemyBullet"), transform.position, transform.rotation);
                 bullet.transform.LookAt(target);
 
                 spawnRate = Random.Range(spawnRateMin, spawnRateMax);
@@ -53,5 +66,14 @@ public class BulletSpawner : MonoBehaviour
                 spawnTimer += Time.deltaTime;
             }
         }
+    }
+
+    public void Hit()
+    {
+        --health;
+
+        GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
+
+        Destroy(blood, 1f);
     }
 }
