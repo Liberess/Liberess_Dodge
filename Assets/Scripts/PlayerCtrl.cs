@@ -7,6 +7,9 @@ public class PlayerCtrl : MonoBehaviour
 {
     public static PlayerCtrl Instance;
 
+    public GameObject cam;
+    public Transform cameraArm;
+
     public Slider hpSlider;
 
     private bool isMove;
@@ -28,10 +31,10 @@ public class PlayerCtrl : MonoBehaviour
         {
             return m_health;
         }
-        
+
         set
         {
-            if(value <= 0)
+            if (value <= 0)
             {
                 Die();
             }
@@ -60,18 +63,77 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Update()
     {
-        if(isMove)
+        LookAround();
+        Move2();
+    }
+
+    private void Move()
+    {
+        if (isMove)
         {
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
 
-            rigid.velocity = new Vector3(inputX * moveSpeed, 0f, inputZ * moveSpeed);
+            //rigid.velocity = new Vector3(inputX * moveSpeed, 0f, inputZ * moveSpeed);
+
+            //rigid.velocity = new Vector3(cam.transform.forward.x * moveSpeed, 0f, cam.transform.forward.z * moveSpeed);
+            rigid.velocity = new Vector3(cam.transform.forward.x * moveSpeed, 0f, cam.transform.forward.y * moveSpeed);
+
+            //rigid.AddForce(cam.transform.forward * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+        }
+
+        /* Vector3 dir = cam.transform.localRotation * Vector3.forward;
+        transform.localRotation = cam.transform.localRotation;
+        transform.localRotation = new Quaternion(0, transform.localRotation.y, 0, transform.localRotation.w);
+        gameObject.transform.Translate(dir * 0.1f * Time.deltaTime); */
+    }
+
+    private void LookAround()
+    {
+        if(GameManager.Instance.isPlay)
+        {
+            Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+            Vector3 camAngle = cameraArm.rotation.eulerAngles;
+
+            float x = camAngle.x - mouseDelta.y;
+
+            if (x < 180f)
+            {
+                x = Mathf.Clamp(x, -1f, 70f);
+            }
+            else
+            {
+                x = Mathf.Clamp(x, 335f, 361f);
+            }
+
+            cameraArm.rotation = Quaternion.Euler(camAngle.x - mouseDelta.y, camAngle.y + mouseDelta.x, camAngle.z);
+        }
+    }
+
+    private void Move2()
+    {
+        if(GameManager.Instance.isPlay)
+        {
+            Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            bool isMove = moveInput.magnitude != 0;
+
+            if (isMove)
+            {
+                Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
+                Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
+                Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
+
+                //transform.forward = moveDir;
+                //transform.forward = lookForward;
+                //transform.position += moveDir * Time.deltaTime * 5f;
+                rigid.velocity = new Vector3(moveDir.x * moveSpeed, 0f, moveDir.z * moveSpeed);
+            }
         }
     }
 
     public void Hit()
     {
-        if(isNoDmg == false) //무적 상태가 아니라면
+        if (isNoDmg == false) //무적 상태가 아니라면
         {
             --health;
 

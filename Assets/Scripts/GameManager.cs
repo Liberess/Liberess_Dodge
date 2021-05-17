@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     //private Vector3[] bulletSpawnerPos = new Vector3[4];
     private int spawnCounter;
 
+    public bool isPlay;
     public bool isGameOver;
 
     private int buildIndex;
@@ -49,6 +50,7 @@ public class GameManager : MonoBehaviour
 
             Time.timeScale = 1;
 
+            isPlay = false;
             isGameOver = false;
 
             scoreTxt.text = "점수 : " + score;
@@ -79,13 +81,15 @@ public class GameManager : MonoBehaviour
                 {
                     if (gameStopPanel.activeSelf)
                     {
-                        gameStopPanel.SetActive(false);
+                        isPlay = true;
                         Time.timeScale = 1;
+                        gameStopPanel.SetActive(false);
                     }
                     else
                     {
-                        gameStopPanel.SetActive(true);
+                        isPlay = false;
                         Time.timeScale = 0;
+                        gameStopPanel.SetActive(true);
                     }
                 }
             }
