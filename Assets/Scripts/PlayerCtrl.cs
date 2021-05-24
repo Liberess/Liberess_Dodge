@@ -11,8 +11,6 @@ public class PlayerCtrl : MonoBehaviour
     public GameObject cam;
     public Transform cameraArm;
 
-    public Slider hpSlider;
-
     private bool isMove;
     private bool isNoDmg;
 
@@ -22,13 +20,13 @@ public class PlayerCtrl : MonoBehaviour
     private float shotDelayTime = 1f;
 
     Rigidbody rigid;
-
     MeshRenderer mesh;
 
     public Material hitMaterial;
     private Material originMaterial;
 
     private int m_health;
+
     public int health
     {
         get
@@ -44,7 +42,7 @@ public class PlayerCtrl : MonoBehaviour
             }
 
             m_health = value;
-            hpSlider.value = m_health;
+            HpBar.Instance.SetHp(m_health);
         }
     }
 
@@ -58,8 +56,8 @@ public class PlayerCtrl : MonoBehaviour
         isMove = true;
         isNoDmg = false;
 
-        health = 5;
-        hpSlider.maxValue = health;
+        health = 10;
+        m_health = 10;
 
         rigid = GetComponent<Rigidbody>();
         mesh = GetComponent<MeshRenderer>();
@@ -140,7 +138,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         if (isNoDmg == false) //무적 상태가 아니라면
         {
-            --health;
+            //--health;
+            health -= 3;
 
             GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
 
@@ -181,7 +180,7 @@ public class PlayerCtrl : MonoBehaviour
         isNoDmg = false;
     }
 
-    public void Die()
+    private void Die()
     {
         isMove = false;
 
