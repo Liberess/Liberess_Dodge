@@ -134,6 +134,18 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
+    public void GetHeal(int _heal)
+    {
+        health += _heal;
+
+        if(health > 10)
+        {
+            health = 10;
+        }
+
+        HpBar.Instance.SetHp(health);
+    }
+
     public void Hit()
     {
         if (isNoDmg == false) //무적 상태가 아니라면

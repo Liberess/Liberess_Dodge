@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     //private Vector3[] bulletSpawnerPos = new Vector3[4];
     private int spawnCounter;
 
+
     public bool isPlay;
     public bool isGameOver;
 
@@ -56,6 +57,9 @@ public class GameManager : MonoBehaviour
             scoreTxt.text = "점수 : " + score;
 
             StartCoroutine(ScoreAdd());
+
+            StartCoroutine(CreateHpItem());
+            StartCoroutine(CreateBulletSpawner());
         }
 
         //BulletSpawner들의 위치 설정
@@ -63,8 +67,6 @@ public class GameManager : MonoBehaviour
         //bulletSpawnerPos[1] = new Vector3(8f, 1f, 8f);
         //bulletSpawnerPos[2] = new Vector3(8f, 1f, -8f);
         //bulletSpawnerPos[3] = new Vector3(-8f, 1f, -8f);
-
-        StartCoroutine(CreateBulletSpawner());
     }
 
     private void Update()
@@ -103,16 +105,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    IEnumerator CreateHpItem()
+    {
+        yield return new WaitForSeconds(5f);
+
+        Vector3 randPos = new Vector3(Random.Range(-23f, 23f), 0f, Random.Range(-23f, 23f));
+
+        GameObject hpItem = Instantiate(Resources.Load<GameObject>("HpItem"), randPos, Quaternion.identity);
+        hpItem.transform.parent = level.transform;
+        hpItem.transform.localPosition = randPos;
+
+        StartCoroutine(CreateHpItem());
+    }
+
     IEnumerator CreateBulletSpawner()
     {
         yield return new WaitForSeconds(5f);
 
-        float posX = Random.Range(-25, 25);
-        float posZ = Random.Range(-25, 25);
+        Vector3 randPos = new Vector3(Random.Range(-23f, 23f), 0f, Random.Range(-23f, 23f));
 
-        if(spawnCounter < 10)
+        if (spawnCounter < 10)
         {
-            GameObject bulletSpawner = Instantiate(Resources.Load<GameObject>("BulletSpawner"), new Vector3(posX, 1, posZ), Quaternion.identity);
+            GameObject bulletSpawner = Instantiate(Resources.Load<GameObject>("BulletSpawner"), randPos, Quaternion.identity);
             //bulletSpawners[spawnCounter] = Instantiate(Resources.Load<GameObject>("BulletSpawner"), bulletSpawnerPos[spawnCounter], Quaternion.identity);
             //bulletSpawners[spawnCounter].transform.parent = level.transform;
             //bulletSpawners[spawnCounter].transform.localPosition = bulletSpawnerPos[spawnCounter];
