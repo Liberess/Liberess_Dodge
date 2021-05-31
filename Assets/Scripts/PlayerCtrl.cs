@@ -8,16 +8,18 @@ public class PlayerCtrl : MonoBehaviour
     public static PlayerCtrl Instance;
 
     public GameObject gun;
-    public GameObject cam;
-    public Transform cameraArm;
+    //public GameObject cam;
+    //public Transform cameraArm;
 
     private bool isMove;
     private bool isNoDmg;
 
-    private float moveSpeed = 12f;
+    private float moveSpeed = 8f;
 
     private float shotTime;
-    private float shotDelayTime = 1f;
+    private float shotDelayTime = 0.2f;
+
+    Vector3 pointToLook;
 
     Rigidbody rigid;
     MeshRenderer mesh;
@@ -46,10 +48,7 @@ public class PlayerCtrl : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        Instance = this;
-    }
+    private void Awake() => Instance = this;
 
     private void Start()
     {
@@ -65,9 +64,25 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Update()
     {
-        LookAround();
-        Move2();
+        //LookAround();
         Shot();
+    }
+
+    private void FixedUpdate()
+    {
+        Move();
+
+        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
+
+        float rayLength;
+
+        if (groupPlane.Raycast(camRay, out rayLength))
+        {
+            pointToLook = camRay.GetPoint(rayLength);
+            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+        }
     }
 
     private void Move()
@@ -77,21 +92,13 @@ public class PlayerCtrl : MonoBehaviour
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
 
-            //rigid.velocity = new Vector3(inputX * moveSpeed, 0f, inputZ * moveSpeed);
-
-            //rigid.velocity = new Vector3(cam.transform.forward.x * moveSpeed, 0f, cam.transform.forward.z * moveSpeed);
-            rigid.velocity = new Vector3(cam.transform.forward.x * moveSpeed, 0f, cam.transform.forward.y * moveSpeed);
-
-            //rigid.AddForce(cam.transform.forward * moveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+            rigid.velocity = new Vector3(inputX * moveSpeed, 0f, inputZ * moveSpeed);
+            //rigid.velocity = new Vector3(cam.transform.forward.x * moveSpeed, 0f, cam.transform.forward.y * moveSpeed);
         }
-
-        /* Vector3 dir = cam.transform.localRotation * Vector3.forward;
-        transform.localRotation = cam.transform.localRotation;
-        transform.localRotation = new Quaternion(0, transform.localRotation.y, 0, transform.localRotation.w);
-        gameObject.transform.Translate(dir * 0.1f * Time.deltaTime); */
     }
 
-    private void LookAround()
+    #region 마우스 시점
+    /* private void LookAround()
     {
         if(GameManager.Instance.isPlay)
         {
@@ -132,7 +139,8 @@ public class PlayerCtrl : MonoBehaviour
                 rigid.velocity = new Vector3(moveDir.x * moveSpeed, 0f, moveDir.z * moveSpeed);
             }
         }
-    }
+    } */
+    #endregion
 
     public void GetHeal(int _heal)
     {
@@ -146,12 +154,11 @@ public class PlayerCtrl : MonoBehaviour
         HpBar.Instance.SetHp(health);
     }
 
-    public void Hit()
+    public void Hit(int _damage)
     {
         if (isNoDmg == false) //무적 상태가 아니라면
         {
-            //--health;
-            health -= 3;
+            health -= _damage;
 
             GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
 
@@ -170,6 +177,7 @@ public class PlayerCtrl : MonoBehaviour
                 shotTime = 0;
 
                 GameObject bullet = Instantiate(Resources.Load<GameObject>("PlayerBullet"), gun.transform.position, Quaternion.identity);
+                bullet.transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
             }
         }
         else

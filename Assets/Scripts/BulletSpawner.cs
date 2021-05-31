@@ -17,16 +17,13 @@ public class BulletSpawner : MonoBehaviour
     private float spawnRate = 0f;
     private float spawnTimer = 0f;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
+    private void Awake() => Instance = this;
 
     private void Start()
     {
         isShot = true;
 
-        health = 3;
+        health = 10;
         spawnTimer = 0f;
 
         spawnRate = Random.Range(spawnRateMin, spawnRateMax);
@@ -68,9 +65,9 @@ public class BulletSpawner : MonoBehaviour
         }
     }
 
-    public void Hit()
+    public void Hit(int _damage)
     {
-        --health;
+        health -= _damage;
 
         GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
 

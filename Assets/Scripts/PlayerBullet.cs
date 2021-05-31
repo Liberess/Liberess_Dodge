@@ -6,15 +6,9 @@ public class PlayerBullet : Bullet
 {
     Rigidbody rigid;
 
-    private void Awake()
-    {
-        rigid = GetComponent<Rigidbody>();
-    }
+    private void Awake() => rigid = GetComponent<Rigidbody>();
 
-    protected override void Move()
-    {
-        rigid.velocity = transform.forward * moveSpeed;
-    }
+    protected override void Move() => rigid.velocity = transform.forward* moveSpeed;
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -29,9 +23,15 @@ public class PlayerBullet : Bullet
 
             if (enemy != null)
             {
-                enemy.Hit();
+                enemy.Hit(damage);
                 Destroy(gameObject);
             }
+        }
+
+        if (collision.CompareTag("Bullet"))
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
         }
     }
 }
