@@ -206,6 +206,14 @@ public class PlayerCtrl : MonoBehaviour
     {
         isMove = false;
 
-        GameManager.Instance.EndGame();
+        if(GameManager.Instance != null)
+        {
+            GameManager.Instance.EndGame();
+        }
+
+        if (GameManager2.Instance != null)
+        {
+            GameManager2.Instance.EndGame();
+        }
     }
 }

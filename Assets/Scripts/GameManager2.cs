@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager2 : MonoBehaviour
 {
-    public static GameManager Instance;
+    public static GameManager2 Instance;
 
     public Text timeTxt;
     public Text recordTxt;
@@ -16,11 +16,14 @@ public class GameManager : MonoBehaviour
     public GameObject gameStopPanel;
 
     public GameObject level;
-    //private GameObject[] bulletSpawners = new GameObject[4];
-    //public Vector3[] bulletSpawnerPos = new Vector3[12];
-    public List<GameObject> bulletSpawnerList = new List<GameObject>();
-    //private Vector3[] bulletSpawnerPos = new Vector3[4];
+
+    public List<GameObject> itemList = new List<GameObject>();
+    public List<GameObject> spawnerList = new List<GameObject>();
+
+    private int itemCounter;
     private int spawnCounter;
+
+    private bool isCreate;
 
     public bool isPlay;
     public bool isGameOver;
@@ -33,20 +36,20 @@ public class GameManager : MonoBehaviour
     private int second;
     private float surviveTime;
 
-    private void Awake()
-    {
-        Instance = this;
-    }
+    private void Awake() => Instance = this;
 
     private void Start()
     {
         buildIndex = SceneManager.GetActiveScene().buildIndex;
 
-        if(buildIndex > 0) //Main 이상
+        if (buildIndex > 0) //Main 이상
         {
             score = 0;
             surviveTime = 0f;
+            itemCounter = 0;
             spawnCounter = 0;
+
+            isCreate = true;
 
             Time.timeScale = 1;
 
@@ -59,18 +62,13 @@ public class GameManager : MonoBehaviour
 
             StartCoroutine(CreateHpItem());
             StartCoroutine(CreateBulletSpawner());
+            StartCoroutine(DestroyItems());
         }
-
-        //BulletSpawner들의 위치 설정
-        //bulletSpawnerPos[0] = new Vector3(-8f, 1f, 8f);
-        //bulletSpawnerPos[1] = new Vector3(8f, 1f, 8f);
-        //bulletSpawnerPos[2] = new Vector3(8f, 1f, -8f);
-        //bulletSpawnerPos[3] = new Vector3(-8f, 1f, -8f);
     }
 
     private void Update()
     {
-        if(buildIndex > 0)
+        if (buildIndex > 0)
         {
             if (!isGameOver)
             {
@@ -110,11 +108,43 @@ public class GameManager : MonoBehaviour
 
         Vector3 randPos = new Vector3(Random.Range(-23f, 23f), 0f, Random.Range(-23f, 23f));
 
-        GameObject hpItem = Instantiate(Resources.Load<GameObject>("HpItem"), randPos, Quaternion.identity);
-        hpItem.transform.parent = level.transform;
-        hpItem.transform.localPosition = randPos;
+        if(isCreate)
+        {
+            if (itemCounter < 5)
+            {
+                GameObject hpItem = Instantiate(Resources.Load<GameObject>("HpItem"), randPos, Quaternion.identity);
+                hpItem.transform.parent = level.transform;
+                hpItem.transform.localPosition = randPos;
+                itemList.Add(hpItem);
+                itemCounter++;
 
-        StartCoroutine(CreateHpItem());
+                StartCoroutine(CreateHpItem());
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+        else
+        {
+            isCreate = true;
+        }
+    }
+
+    IEnumerator DestroyItems()
+    {
+        yield return new WaitForSeconds(10f);
+
+        isCreate = false;
+
+        foreach(GameObject item in itemList)
+        {
+            Destroy(item);
+        }
+
+        itemList.Clear();
+
+        StartCoroutine(DestroyItems());
     }
 
     IEnumerator CreateBulletSpawner()
@@ -129,8 +159,8 @@ public class GameManager : MonoBehaviour
             //bulletSpawners[spawnCounter] = Instantiate(Resources.Load<GameObject>("BulletSpawner"), bulletSpawnerPos[spawnCounter], Quaternion.identity);
             //bulletSpawners[spawnCounter].transform.parent = level.transform;
             //bulletSpawners[spawnCounter].transform.localPosition = bulletSpawnerPos[spawnCounter];
-            bulletSpawnerList.Add(bulletSpawner);
             //level.GetComponent<Rotator>().rotationSpeed += 15f;
+            spawnerList.Add(bulletSpawner);
             spawnCounter++;
 
             StartCoroutine(CreateBulletSpawner());
@@ -175,11 +205,6 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         StartCoroutine(ScoreAdd());
-    }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene("Level_1");
     }
 
     public void GoMain()
