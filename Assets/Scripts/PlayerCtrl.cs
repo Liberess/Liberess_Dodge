@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerCtrl : MonoBehaviour
 {
     public static PlayerCtrl Instance;
+    public HpBar hpBar;
 
     public GameObject gun;
     //public GameObject cam;
@@ -44,7 +45,8 @@ public class PlayerCtrl : MonoBehaviour
             }
 
             m_health = value;
-            HpBar.Instance.SetHp(m_health);
+            //HpBar.Instance.SetHp(m_health);
+            hpBar.SetHp(m_health);
         }
     }
 

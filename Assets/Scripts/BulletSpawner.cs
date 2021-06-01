@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour
 {
     public static BulletSpawner Instance;
+    public HpBar hpBar;
 
     private bool isShot;
 
@@ -68,6 +69,7 @@ public class BulletSpawner : MonoBehaviour
     public void Hit(int _damage)
     {
         health -= _damage;
+        hpBar.SetHp(health);
 
         GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
 
