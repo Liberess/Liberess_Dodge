@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class CamFollow : MonoBehaviour
 {
-    public GameObject target;
-    public float smoothing = 5.0f;
+    private GameObject target;
 
+    [SerializeField]
+    private float smoothing = 5.0f;
+
+    [SerializeField]
     private Vector3 offset;
 
-    private void Start() => offset = transform.position - target.transform.position;
+    private void Start()
+    {
+        target = FindObjectOfType<PlayerCtrl>().gameObject;
+        //offset = transform.position - target.transform.position;
+    }
+
 
     private void FixedUpdate()
     {

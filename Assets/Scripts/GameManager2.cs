@@ -144,7 +144,22 @@ public class GameManager2 : MonoBehaviour
 
         itemList.Clear();
 
+        foreach (GameObject bulletSpawner in spawnerList)
+        {
+            bulletSpawner.GetComponent<BulletSpawner>().isMove = true;
+        }
+
+        Invoke("SpawnerStop", 2f);
+
         StartCoroutine(DestroyItems());
+    }
+
+    private void SpawnerStop()
+    {
+        foreach (GameObject bulletSpawner in spawnerList)
+        {
+            bulletSpawner.GetComponent<BulletSpawner>().isMove = false;
+        }
     }
 
     IEnumerator CreateBulletSpawner()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BulletSpawner : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class BulletSpawner : MonoBehaviour
     public HpBar hpBar;
 
     private bool isShot;
+    public bool isMove;
 
     private int health;
 
@@ -18,27 +20,35 @@ public class BulletSpawner : MonoBehaviour
     private float spawnRate = 0f;
     private float spawnTimer = 0f;
 
+    private NavMeshAgent nvAgent;
+
     private void Awake() => Instance = this;
 
     private void Start()
     {
         isShot = true;
+        isMove = false;
 
         health = 10;
         spawnTimer = 0f;
 
         spawnRate = Random.Range(spawnRateMin, spawnRateMax);
         target = FindObjectOfType<PlayerCtrl>().transform;
+
+        nvAgent = GetComponent<NavMeshAgent>();
+
+        StartCoroutine(SpawnerAI());
     }
 
     private void Update()
     {
-        if(health <= 0)
+        if (health <= 0)
         {
+            GameManager2.Instance.spawnerList.Remove(gameObject);
             Destroy(gameObject);
         }
 
-        if(PlayerCtrl.Instance.health <= 0)
+        if (PlayerCtrl.Instance.health <= 0)
         {
             isShot = false;
         }
@@ -74,5 +84,31 @@ public class BulletSpawner : MonoBehaviour
         GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
 
         Destroy(blood, 1f);
+    }
+
+    IEnumerator SpawnerAI()
+    {
+        while (health > 0)
+        {
+            yield return new WaitForSeconds(0.2f);
+
+            if (isMove)
+            {
+                nvAgent.destination = target.position;
+                nvAgent.isStopped = false;
+            }
+            else
+            {
+                nvAgent.isStopped = true;
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("PlayerBullet"))
+        {
+            Hit(3);
+        }
     }
 }

@@ -27,4 +27,12 @@ public class Enemy : MonoBehaviour
 
         Destroy(blood, 1f);
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("PlayerBullet"))
+        {
+            Hit();
+        }
+    }
 }

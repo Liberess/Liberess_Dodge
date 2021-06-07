@@ -8,6 +8,7 @@ TagManager:
   - Land
   - Wall
   - Enemy
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

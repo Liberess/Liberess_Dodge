@@ -14,6 +14,8 @@ public class PlayerCtrl : MonoBehaviour
 
     private bool isMove;
     private bool isNoDmg;
+    [SerializeField]
+    private bool isMiddle;
 
     private float moveSpeed = 8f;
 
@@ -22,11 +24,8 @@ public class PlayerCtrl : MonoBehaviour
 
     Vector3 pointToLook;
 
+    Animator anim;
     Rigidbody rigid;
-    MeshRenderer mesh;
-
-    public Material hitMaterial;
-    private Material originMaterial;
 
     private int m_health;
 
@@ -56,35 +55,24 @@ public class PlayerCtrl : MonoBehaviour
     {
         isMove = true;
         isNoDmg = false;
+        isMiddle = false;
 
         health = 10;
         m_health = 10;
 
+        anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
-        mesh = GetComponent<MeshRenderer>();
     }
 
     private void Update()
     {
-        //LookAround();
         Shot();
     }
 
     private void FixedUpdate()
     {
         Move();
-
-        Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
-
-        float rayLength;
-
-        if (groupPlane.Raycast(camRay, out rayLength))
-        {
-            pointToLook = camRay.GetPoint(rayLength);
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-        }
+        MousePocus();
     }
 
     private void Move()
@@ -94,55 +82,43 @@ public class PlayerCtrl : MonoBehaviour
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
 
-            rigid.velocity = new Vector3(inputX * moveSpeed, 0f, inputZ * moveSpeed);
-            //rigid.velocity = new Vector3(cam.transform.forward.x * moveSpeed, 0f, cam.transform.forward.y * moveSpeed);
-        }
-    }
-
-    #region 마우스 시점
-    /* private void LookAround()
-    {
-        if(GameManager.Instance.isPlay)
-        {
-            Vector2 mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-            Vector3 camAngle = cameraArm.rotation.eulerAngles;
-
-            float x = camAngle.x - mouseDelta.y;
-
-            if (x < 180f)
+            if(inputX == 0 && inputZ == 0)
             {
-                x = Mathf.Clamp(x, -1f, 70f);
+                anim.SetBool("isMove", false);
             }
             else
             {
-                x = Mathf.Clamp(x, 335f, 361f);
+                anim.SetBool("isMove", true);
             }
 
-            cameraArm.rotation = Quaternion.Euler(camAngle.x - mouseDelta.y, camAngle.y + mouseDelta.x, camAngle.z);
+            anim.SetFloat("inputX", inputX);
+            anim.SetFloat("inputZ", inputZ);
+
+            rigid.velocity = new Vector3(inputX * moveSpeed, 0f, inputZ * moveSpeed);
         }
     }
 
-    private void Move2()
+    private void MousePocus()
     {
-        if(GameManager.Instance.isPlay)
+        if(!isMiddle)
         {
-            Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            bool isMove = moveInput.magnitude != 0;
+            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (isMove)
+            Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
+
+            float rayLength;
+
+            if (groupPlane.Raycast(camRay, out rayLength))
             {
-                Vector3 lookForward = new Vector3(cameraArm.forward.x, 0f, cameraArm.forward.z).normalized;
-                Vector3 lookRight = new Vector3(cameraArm.right.x, 0f, cameraArm.right.z).normalized;
-                Vector3 moveDir = lookForward * moveInput.y + lookRight * moveInput.x;
-
-                //transform.forward = moveDir;
-                //transform.forward = lookForward;
-                //transform.position += moveDir * Time.deltaTime * 5f;
-                rigid.velocity = new Vector3(moveDir.x * moveSpeed, 0f, moveDir.z * moveSpeed);
+                pointToLook = camRay.GetPoint(rayLength);
+                transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
             }
         }
-    } */
-    #endregion
+        else
+        {
+            Debug.Log("미들 펄스");
+        }
+    }
 
     public void GetHeal(int _heal)
     {
@@ -176,10 +152,12 @@ public class PlayerCtrl : MonoBehaviour
         {
             if (Input.GetButtonDown("Fire1"))
             {
+                anim.SetTrigger("doShot");
+
                 shotTime = 0;
 
-                GameObject bullet = Instantiate(Resources.Load<GameObject>("PlayerBullet"), gun.transform.position, Quaternion.identity);
-                bullet.transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+                //GameObject bullet = Instantiate(Resources.Load<GameObject>("PlayerBullet"), gun.transform.position, Quaternion.identity);
+                //bullet.transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
             }
         }
         else
@@ -192,12 +170,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         isNoDmg = true;
 
-        originMaterial = mesh.material;
-        mesh.material = hitMaterial;
-
         yield return new WaitForSeconds(1f);
-
-        mesh.material = originMaterial;
 
         isNoDmg = false;
     }
@@ -215,5 +188,15 @@ public class PlayerCtrl : MonoBehaviour
         {
             GameManager2.Instance.EndGame();
         }
+    }
+
+    public void MiddleOn()
+    {
+        isMiddle = true;
+    }
+
+    public void MiddleOff()
+    {
+        isMiddle = false;
     }
 }
