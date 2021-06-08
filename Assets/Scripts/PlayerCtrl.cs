@@ -9,12 +9,10 @@ public class PlayerCtrl : MonoBehaviour
     public HpBar hpBar;
 
     public GameObject gun;
-    //public GameObject cam;
-    //public Transform cameraArm;
 
+    private bool isAlive;
     private bool isMove;
     private bool isNoDmg;
-    [SerializeField]
     private bool isMiddle;
 
     private float moveSpeed = 8f;
@@ -53,6 +51,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Start()
     {
+        isAlive = true;
         isMove = true;
         isNoDmg = false;
         isMiddle = false;
@@ -77,7 +76,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Move()
     {
-        if (isMove)
+        if (isMove && isAlive)
         {
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
@@ -100,7 +99,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void MousePocus()
     {
-        if(!isMiddle)
+        if(!isMiddle && isAlive)
         {
             Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -113,10 +112,6 @@ public class PlayerCtrl : MonoBehaviour
                 pointToLook = camRay.GetPoint(rayLength);
                 transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
             }
-        }
-        else
-        {
-            Debug.Log("미들 펄스");
         }
     }
 
@@ -134,7 +129,7 @@ public class PlayerCtrl : MonoBehaviour
 
     public void Hit(int _damage)
     {
-        if (isNoDmg == false) //무적 상태가 아니라면
+        if (isNoDmg == false && isAlive) //무적 상태가 아니라면
         {
             health -= _damage;
 
@@ -148,7 +143,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Shot()
     {
-        if(shotTime >= shotDelayTime)
+        if(shotTime >= shotDelayTime && isAlive)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -177,7 +172,10 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Die()
     {
+        isAlive = false;
         isMove = false;
+
+        anim.SetTrigger("doDie");
 
         if(GameManager.Instance != null)
         {
