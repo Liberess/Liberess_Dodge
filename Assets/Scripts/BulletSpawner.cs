@@ -45,7 +45,8 @@ public class BulletSpawner : MonoBehaviour
         if (health <= 0)
         {
             GameManager2.Instance.spawnerList.Remove(gameObject);
-            Destroy(gameObject);
+            transform.parent.GetComponent<Enemy>().IsDestroy();
+            //Destroy(gameObject);
         }
 
         if (PlayerCtrl.Instance.health <= 0)

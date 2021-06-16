@@ -4,35 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int hp;
-
-    private void Awake()
+    public void IsDestroy()
     {
-        hp = 3;
-    }
-
-    private void Update()
-    {
-        if(hp <= 0)
-        {
-            Destroy(gameObject);
-        }
-    }
-
-    public void Hit()
-    {
-        --hp;
-
-        GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
-
-        Destroy(blood, 1f);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("PlayerBullet"))
-        {
-            Hit();
-        }
+        Destroy(gameObject);
     }
 }
