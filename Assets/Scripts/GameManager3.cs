@@ -132,18 +132,10 @@ public class GameManager3 : MonoBehaviour
 
             switch(buildIndex)
             {
-                case 1:
-                    rand = Random.Range(0, 1); //Slime
-                    break;
-                case 2:
-                    rand = Random.Range(0, 2); //Slime ~ Turtle
-                    break;
-                case 3:
-                    rand = Random.Range(0, 3); //Slime ~ Beholder
-                    break;
-                case 4:
-                    rand = Random.Range(0, 4); //Slime ~ Chest
-                    break;
+                case 1: rand = Random.Range(0, 1); break; //Slime
+                case 2: rand = Random.Range(0, 2); break; //Slime ~ Turtle
+                case 3: rand = Random.Range(0, 3); break; //Slime ~ Beholder
+                case 4: rand = Random.Range(0, 4); break; //Slime ~ Chest
             }
 
             Instantiate(Resources.Load(monsName[rand]), spawnPos[i].position, Quaternion.identity);

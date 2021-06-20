@@ -147,8 +147,6 @@ public class PlayerCtrl : MonoBehaviour
                     SoundManager.Instance.PlaySFX("PlayerShot");
                     GetComponent<DemoShooting>().Shot();
                 }
-                //GameObject bullet = Instantiate(Resources.Load<GameObject>("PlayerBullet"), gun.transform.position, Quaternion.identity);
-                //bullet.transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
             }
         }
         else

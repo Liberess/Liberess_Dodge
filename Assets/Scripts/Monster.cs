@@ -16,7 +16,6 @@ public abstract class Monster : MonoBehaviour
 {
     [SerializeField]
     protected MonsterHpBar hpBar;
-    //protected HpBar hpBar;
 
     [SerializeField]
     protected MonsType monsType;
