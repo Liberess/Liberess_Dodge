@@ -8,17 +8,19 @@ public class GameManager3 : MonoBehaviour
 {
     public static GameManager3 Instance;
 
+    public Text stageTxt;
+    public Text monsTxt;
+
     public GameObject gameOverPanel;
     public GameObject gameStopPanel;
 
-    public GameObject level;
-
-    public List<GameObject> enemyList = new List<GameObject>();
+    public List<GameObject> monsterList = new List<GameObject>();
 
     public bool isPlay;
     public bool isGameOver;
 
-    private int buildIndex;
+    public int buildIndex;
+    private int monsCount;
 
     private void Awake() => Instance = this;
 
@@ -32,6 +34,17 @@ public class GameManager3 : MonoBehaviour
 
             isPlay = true;
             isGameOver = false;
+
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Monster");
+
+            for (int i = 0; i < enemies.Length; i++)
+                monsterList.Add(enemies[i]);
+
+            monsCount = monsterList.Count / 2;
+
+            stageTxt.text = "스테이지 " + buildIndex;
+
+            PlayerHpBar.Instance.SetHp();
         }
     }
 
@@ -46,18 +59,45 @@ public class GameManager3 : MonoBehaviour
                     if (gameStopPanel.activeSelf)
                     {
                         isPlay = true;
-                        Time.timeScale = 1;
                         gameStopPanel.SetActive(false);
                     }
                     else
                     {
                         isPlay = false;
-                        Time.timeScale = 0;
                         gameStopPanel.SetActive(true);
                     }
                 }
+
+                monsTxt.text = "남은 적 : " + (monsterList.Count / 2) + "/" + monsCount;
             }
         }
+    }
+
+    public void InspectMonsList()
+    {
+        if(monsterList.Count == 0)
+        {
+            CamFollow.Instance.isPlayer = false;
+            PlayerCtrl.Instance.isMove = false;
+            PlayerCtrl.Instance.isShot = false;
+            StartCoroutine(OpenDoor());
+        }
+    }
+
+    IEnumerator OpenDoor()
+    {
+        yield return new WaitForSeconds(1f);
+
+        GameObject.Find("Door").GetComponent<Animator>().SetTrigger("doOpen");
+
+        yield return new WaitForSeconds(2.5f);
+
+        GameObject.Find("GameCanvas").transform.Find("Skill Group").gameObject.SetActive(true);
+    }
+
+    public void NextStage()
+    {
+        Michsky.LSS.LoadingScreenManager.Instance.LoadScene("Level_" + (buildIndex + 1));
     }
 
     public void CreateHpItem(Vector2 pos) => Instantiate(Resources.Load<GameObject>("HpItem"), pos, Quaternion.identity);
@@ -87,11 +127,6 @@ public class GameManager3 : MonoBehaviour
         }
     } */
 
-    public void GoMain()
-    {
-        SceneManager.LoadScene("Main");
-    }
-
     public void EndGame()
     {
         StopAllCoroutines();
@@ -101,13 +136,5 @@ public class GameManager3 : MonoBehaviour
         gameOverPanel.SetActive(true);
     }
 
-    public void RetryGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    public void QuitGame()
-    {
-        Application.Quit();
-    }
+    public void QuitGame() => Application.Quit();
 }

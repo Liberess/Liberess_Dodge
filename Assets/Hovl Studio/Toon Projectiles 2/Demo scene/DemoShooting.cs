@@ -16,37 +16,33 @@ public class DemoShooting : MonoBehaviour
     private Quaternion rotation;
 
     [Header("GUI")]
-    private float windowDpi;
     private int Prefab;
     private GameObject Instance;
-    private float hSliderValue = 0.1f;
-    private float fireCountdown = 0f;
+    //private float hSliderValue = 0.1f;
+    //private float fireCountdown = 0f;
 
     //Double-click protection
-    private float buttonSaver = 0f;
+    //private float buttonSaver = 0f;
 
     //For Camera shake 
     //public Animation camAnim;
 
     void Start()
     {
-        if (Screen.dpi < 1) windowDpi = 1;
-        if (Screen.dpi < 200) windowDpi = 1;
-        else windowDpi = Screen.dpi / 200f;
         Counter(0);
     }
 
     void Update()
     {
         //Single shoot
-        if (Input.GetMouseButtonDown(0))
+        /* if (Input.GetMouseButtonDown(0))
         {
             //camAnim.Play(camAnim.clip.name);
             Instantiate(Prefabs[Prefab], FirePoint.transform.position, FirePoint.transform.rotation);
-        }
+        } */
 
         //Fast shooting
-        if (Input.GetMouseButton(1) && fireCountdown <= 0f)
+        /* if (Input.GetMouseButton(1) && fireCountdown <= 0f)
         {
             Instantiate(Prefabs[Prefab], FirePoint.transform.position, FirePoint.transform.rotation);
             fireCountdown = 0;
@@ -55,7 +51,7 @@ public class DemoShooting : MonoBehaviour
         fireCountdown -= Time.deltaTime;
 
         //To change projectiles
-        if ((Input.GetKey(KeyCode.A) || Input.GetAxis("Horizontal") < 0) && buttonSaver >= 0.4f)// left button
+        /* if ((Input.GetKey(KeyCode.A) || Input.GetAxis("Horizontal") < 0) && buttonSaver >= 0.4f)// left button
         {
             buttonSaver = 0f;
             //Counter(-1);
@@ -65,10 +61,10 @@ public class DemoShooting : MonoBehaviour
             buttonSaver = 0f;
             //Counter(+1);
         }
-        buttonSaver += Time.deltaTime;
+        buttonSaver += Time.deltaTime; */
 
         //To rotate fire point
-        /* if (Cam != null)
+        /*if (Cam != null)
         {
             RaycastHit hit;
             var mousePos = Input.mousePosition;
@@ -85,13 +81,18 @@ public class DemoShooting : MonoBehaviour
     }
 
     //GUI Text
-    void OnGUI()
+    /* void OnGUI()
     {
         GUI.Label(new Rect(10 * windowDpi, 5 * windowDpi, 400 * windowDpi, 20 * windowDpi), "Use left mouse button to single shoot!");
         GUI.Label(new Rect(10 * windowDpi, 25 * windowDpi, 400 * windowDpi, 20 * windowDpi), "Use and hold the right mouse button for quick shooting!");
         GUI.Label(new Rect(10 * windowDpi, 45 * windowDpi, 400 * windowDpi, 20 * windowDpi), "Fire rate:");
         hSliderValue = GUI.HorizontalSlider(new Rect(70 * windowDpi, 50 * windowDpi, 100 * windowDpi, 20 * windowDpi), hSliderValue, 0.0f, 1.0f);
         GUI.Label(new Rect(10 * windowDpi, 65 * windowDpi, 400 * windowDpi, 20 * windowDpi), "Use the keyboard buttons A/<- and D/-> to change projectiles!");
+    } */
+
+    public void Shot()
+    {
+        Instantiate(Prefabs[Prefab], FirePoint.transform.position, FirePoint.transform.rotation);
     }
 
     // To change prefabs (count - prefab number)

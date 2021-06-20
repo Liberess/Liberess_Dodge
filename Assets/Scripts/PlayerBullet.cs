@@ -17,7 +17,7 @@ public class PlayerBullet : Bullet
             Destroy(gameObject);
         }
 
-        if (collision.CompareTag("Enemy"))
+        if (collision.CompareTag("Monster"))
         {
             BulletSpawner enemy = collision.GetComponent<BulletSpawner>();
 

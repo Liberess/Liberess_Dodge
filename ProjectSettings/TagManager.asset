@@ -6,9 +6,11 @@ TagManager:
   tags:
   - Bullet
   - PlayerBullet
-  - Enemy
-  - Wall
   - Land
+  - Monster
+  - Undefined
+  - Wall
+  - MonsterBody
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - Enemy
-  - 
+  - Monster
+  - Bullet
   - 
   - 
   - 

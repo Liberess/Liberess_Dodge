@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4250068348281922}
   - component: {fileID: 198483148804925818}
   - component: {fileID: 199275579531301440}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 4554578897437098}
   - component: {fileID: 198553239329097796}
   - component: {fileID: 199605731448989904}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9644,7 +9644,7 @@ GameObject:
   - component: {fileID: 4663317633850922}
   - component: {fileID: 198149097308531690}
   - component: {fileID: 199332325794253726}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14456,7 +14456,7 @@ GameObject:
   - component: {fileID: 4246024605812174}
   - component: {fileID: 198594740086084638}
   - component: {fileID: 199347059380632820}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}

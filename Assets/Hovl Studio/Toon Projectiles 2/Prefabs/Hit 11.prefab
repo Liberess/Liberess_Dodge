@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4040317058552028}
   - component: {fileID: 198053569035148562}
   - component: {fileID: 199758362419343536}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 4990923202941090}
   - component: {fileID: 198397288327040522}
   - component: {fileID: 199691188234960322}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9644,7 +9644,7 @@ GameObject:
   - component: {fileID: 4142590970830686}
   - component: {fileID: 198619150366067880}
   - component: {fileID: 199708623864179962}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hit 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14462,7 +14462,7 @@ GameObject:
   - component: {fileID: 4067129695297182}
   - component: {fileID: 198864852430823816}
   - component: {fileID: 199259964045895822}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SideTrails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19292,7 +19292,7 @@ GameObject:
   - component: {fileID: 4062860456831858}
   - component: {fileID: 198924517106518970}
   - component: {fileID: 199148455845983912}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24113,7 +24113,7 @@ GameObject:
   - component: {fileID: 4047542501238428}
   - component: {fileID: 198864614990467484}
   - component: {fileID: 199767895184167134}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28934,7 +28934,7 @@ GameObject:
   - component: {fileID: 4095113719003282}
   - component: {fileID: 198271129106982246}
   - component: {fileID: 199927613932204322}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

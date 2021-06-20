@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4744419704773298}
   - component: {fileID: 198282233012130876}
   - component: {fileID: 199815954913313620}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: SparksLong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 4427470541505110}
   - component: {fileID: 198826952063879498}
   - component: {fileID: 199151790878929400}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9644,7 +9644,7 @@ GameObject:
   - component: {fileID: 4554726983903692}
   - component: {fileID: 198610729742580372}
   - component: {fileID: 199362298537829494}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Distortion(Delete for Mobile)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14456,7 +14456,7 @@ GameObject:
   - component: {fileID: 4032914547148806}
   - component: {fileID: 198704650965736828}
   - component: {fileID: 199408257484793732}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19268,7 +19268,7 @@ GameObject:
   - component: {fileID: 4838509996005904}
   - component: {fileID: 198616708323019054}
   - component: {fileID: 199857501239243070}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hit 13
   m_TagString: Untagged
   m_Icon: {fileID: 0}

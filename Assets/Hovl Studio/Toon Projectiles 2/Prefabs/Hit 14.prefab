@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4474501846290602}
   - component: {fileID: 198411454914801460}
   - component: {fileID: 199597293262973196}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 4460826068752978}
   - component: {fileID: 198110093490659628}
   - component: {fileID: 199527528972437876}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShockWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9635,7 +9635,7 @@ GameObject:
   - component: {fileID: 4738082838824202}
   - component: {fileID: 198346030960586608}
   - component: {fileID: 199984107156669022}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14465,7 +14465,7 @@ GameObject:
   - component: {fileID: 4664688343109816}
   - component: {fileID: 198596575938941544}
   - component: {fileID: 199424316893067088}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Stones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19286,7 +19286,7 @@ GameObject:
   - component: {fileID: 4964082813300452}
   - component: {fileID: 198857218350000924}
   - component: {fileID: 199492329326838448}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24098,7 +24098,7 @@ GameObject:
   - component: {fileID: 4386987849411500}
   - component: {fileID: 198155188688069838}
   - component: {fileID: 199216778679528010}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28919,7 +28919,7 @@ GameObject:
   - component: {fileID: 4248073302771598}
   - component: {fileID: 198629483972137030}
   - component: {fileID: 199761057104978922}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hit 14
   m_TagString: Untagged
   m_Icon: {fileID: 0}

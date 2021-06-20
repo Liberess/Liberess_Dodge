@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4853433443209398}
   - component: {fileID: 198569696703220030}
   - component: {fileID: 199348180382102926}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 4223237669441598}
   - component: {fileID: 198262025805929186}
   - component: {fileID: 199134901617217368}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9644,7 +9644,7 @@ GameObject:
   - component: {fileID: 4934342903958824}
   - component: {fileID: 198041006860974860}
   - component: {fileID: 199240641774749072}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14468,7 +14468,7 @@ GameObject:
   - component: {fileID: 4288442748697372}
   - component: {fileID: 198926177925426992}
   - component: {fileID: 199151527773781610}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Quads
   m_TagString: Untagged
   m_Icon: {fileID: 0}

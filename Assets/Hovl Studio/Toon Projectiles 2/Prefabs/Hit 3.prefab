@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4225072619576556}
   - component: {fileID: 198246210669810978}
   - component: {fileID: 199953979079024862}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 4836209938455288}
   - component: {fileID: 198074204349930180}
   - component: {fileID: 199473276225918674}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Quads
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9644,7 +9644,7 @@ GameObject:
   - component: {fileID: 4032123178591350}
   - component: {fileID: 198390457726892526}
   - component: {fileID: 199392996672874268}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hit 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14469,7 +14469,7 @@ GameObject:
   - component: {fileID: 4226637319726632}
   - component: {fileID: 198444284184104134}
   - component: {fileID: 199482212865881962}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Shine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19281,7 +19281,7 @@ GameObject:
   - component: {fileID: 4378299013300412}
   - component: {fileID: 198300194160566836}
   - component: {fileID: 199875848256252398}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

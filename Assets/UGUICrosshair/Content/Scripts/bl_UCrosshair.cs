@@ -126,16 +126,13 @@ public class bl_UCrosshair : MonoBehaviour
     {
         if (!useDetection)
             return;
-        
         //get middle screen position
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-       
         if (FollowMouse)
         {
             //get the mouse position and convert to world position
             ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         }
-        
         //Vector3 point = ray.origin + (ray.direction * 100);
         if (Physics.Raycast(ray.origin, ray.direction, TargetDetectMaxDistance, TargetLayer))
         {

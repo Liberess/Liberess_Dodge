@@ -6,58 +6,38 @@ using UnityEngine.UI;
 public class PlayerCtrl : MonoBehaviour
 {
     public static PlayerCtrl Instance;
-    public HpBar hpBar;
+    private DataManager dataMgr;
+    //public HpBar hpBar;
 
     public GameObject gun;
 
     private bool isAlive;
-    private bool isMove;
+    public bool isMove;
+    public bool isShot;
+    
     private bool isNoDmg;
     private bool isMiddle;
 
-    private float moveSpeed = 8f;
-
     private float shotTime;
-    private float shotDelayTime = 0.2f;
 
     Vector3 pointToLook;
 
     Animator anim;
     Rigidbody rigid;
 
-    private int m_health;
-
-    public int health
+    private void Awake()
     {
-        get
-        {
-            return m_health;
-        }
-
-        set
-        {
-            if (value <= 0)
-            {
-                Die();
-            }
-
-            m_health = value;
-            //HpBar.Instance.SetHp(m_health);
-            hpBar.SetHp(m_health);
-        }
+        Instance = this;
+        dataMgr = DataManager.Instance;
     }
-
-    private void Awake() => Instance = this;
 
     private void Start()
     {
         isAlive = true;
         isMove = true;
+        isShot = true;
         isNoDmg = false;
         isMiddle = false;
-
-        health = 10;
-        m_health = 10;
 
         anim = GetComponent<Animator>();
         rigid = GetComponent<Rigidbody>();
@@ -66,6 +46,7 @@ public class PlayerCtrl : MonoBehaviour
     private void Update()
     {
         Shot();
+        PlayerHpBar.Instance.currentHp = DataManager.Instance.gameData.health;
     }
 
     private void FixedUpdate()
@@ -81,7 +62,7 @@ public class PlayerCtrl : MonoBehaviour
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
 
-            if(inputX == 0 && inputZ == 0)
+            if (inputX == 0 && inputZ == 0)
             {
                 anim.SetBool("isMove", false);
             }
@@ -93,13 +74,13 @@ public class PlayerCtrl : MonoBehaviour
             anim.SetFloat("inputX", inputX);
             anim.SetFloat("inputZ", inputZ);
 
-            rigid.velocity = new Vector3(inputX * moveSpeed, 0f, inputZ * moveSpeed);
+            rigid.velocity = new Vector3(inputX * dataMgr.gameData.moveSpeed, 0f, inputZ * dataMgr.gameData.moveSpeed);
         }
     }
 
     private void MousePocus()
     {
-        if(!isMiddle && isAlive)
+        if (!isMiddle && isAlive)
         {
             Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -117,21 +98,32 @@ public class PlayerCtrl : MonoBehaviour
 
     public void GetHeal(int _heal)
     {
-        health += _heal;
+        dataMgr.gameData.health += _heal;
 
-        if(health > 10)
+        if (dataMgr.gameData.health >= dataMgr.gameData.maxHealth)
         {
-            health = 10;
+            dataMgr.gameData.health = dataMgr.gameData.maxHealth;
         }
 
-        HpBar.Instance.SetHp(health);
+        //HpBar.Instance.SetHp(health);
+        PlayerHpBar.Instance.currentHp = dataMgr.gameData.health;
+    }
+
+    public void LevelUp()
+    {
+        dataMgr.gameData.health = (int)dataMgr.gameData.maxHealth;
+        
+        PlayerHpBar.Instance.SetHp();
     }
 
     public void Hit(int _damage)
     {
         if (isNoDmg == false && isAlive) //무적 상태가 아니라면
         {
-            health -= _damage;
+            if (dataMgr.gameData.health - _damage <= 0)
+                Die();
+            else
+                dataMgr.gameData.health -= _damage;
 
             GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
 
@@ -143,13 +135,21 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Shot()
     {
-        if(shotTime >= shotDelayTime && isAlive)
+        if (shotTime >= dataMgr.gameData.shotDelayTime && isAlive && isShot)
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                anim.SetTrigger("doShot");
-
                 shotTime = 0;
+
+                if (dataMgr.gameData.atkCount >= 1)
+                {
+                    StopCoroutine(DoubleShot());
+                    StartCoroutine(DoubleShot());
+                }
+                else
+                {
+                    GetComponent<DemoShooting>().Shot();
+                }
 
                 //GameObject bullet = Instantiate(Resources.Load<GameObject>("PlayerBullet"), gun.transform.position, Quaternion.identity);
                 //bullet.transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
@@ -158,6 +158,18 @@ public class PlayerCtrl : MonoBehaviour
         else
         {
             shotTime += Time.deltaTime;
+        }
+    }
+
+    IEnumerator DoubleShot()
+    {
+        int i = 0;
+
+        while(i <= dataMgr.gameData.atkCount)
+        {
+            i++;
+            GetComponent<DemoShooting>().Shot();
+            yield return new WaitForSeconds(0.2f);
         }
     }
 
@@ -175,19 +187,14 @@ public class PlayerCtrl : MonoBehaviour
         isAlive = false;
         isMove = false;
 
+        dataMgr.gameData.health = 0f;
+
         anim.SetTrigger("doDie");
 
-        if(GameManager.Instance != null)
-        {
-            GameManager.Instance.EndGame();
-        }
-
-        if (GameManager2.Instance != null)
-        {
-            GameManager2.Instance.EndGame();
-        }
+        GameManager3.Instance.EndGame();
     }
 
+    #region MousePocusMiddle
     public void MiddleOn()
     {
         isMiddle = true;
@@ -196,5 +203,14 @@ public class PlayerCtrl : MonoBehaviour
     public void MiddleOff()
     {
         isMiddle = false;
+    }
+    #endregion
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Finish"))
+        {
+            GameManager3.Instance.NextStage();
+        }
     }
 }

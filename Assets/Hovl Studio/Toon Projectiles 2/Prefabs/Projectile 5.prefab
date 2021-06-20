@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 108126719622298186}
   - component: {fileID: 54532032065294694}
   - component: {fileID: 135086074286028782}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Projectile 5
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
@@ -4939,7 +4939,7 @@ GameObject:
   - component: {fileID: 198648695856454886}
   - component: {fileID: 114608011662669244}
   - component: {fileID: 199697115250763210}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}

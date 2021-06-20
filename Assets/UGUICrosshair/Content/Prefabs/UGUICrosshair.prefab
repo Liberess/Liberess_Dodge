@@ -4122,15 +4122,15 @@ MonoBehaviour:
   RotationSpeed: 2.7
   OnFireScaleRate: 0.1
   RotateCrosshair: 0
-  FollowMouse: 1
-  HideMouseCursor: 1
+  FollowMouse: 0
+  HideMouseCursor: 0
   Duration: 1
   IncreaseAmount: 30
   HitMarkerColor: {r: 1, g: 1, b: 1, a: 1}
   useDetection: 1
   TargetLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 4294967295
   OnTargetFocusColor: {r: 1, g: 0, b: 0, a: 1}
   TargetDetectMaxDistance: 100
   ColorTransitionDuration: 0.15

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4984850149884908}
   - component: {fileID: 198657971356398654}
   - component: {fileID: 199482176484518440}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hit 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4827,7 +4827,7 @@ GameObject:
   - component: {fileID: 4321104727564598}
   - component: {fileID: 198606552853890176}
   - component: {fileID: 199584286218479150}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9657,7 +9657,7 @@ GameObject:
   - component: {fileID: 4507323530454054}
   - component: {fileID: 198390444443067372}
   - component: {fileID: 199785928810256940}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShoclWaveDark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14469,7 +14469,7 @@ GameObject:
   - component: {fileID: 4918288113785400}
   - component: {fileID: 198657120269599138}
   - component: {fileID: 199573146621024936}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19290,7 +19290,7 @@ GameObject:
   - component: {fileID: 4298944555358188}
   - component: {fileID: 198291894552126148}
   - component: {fileID: 199253029946207220}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShoclWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}

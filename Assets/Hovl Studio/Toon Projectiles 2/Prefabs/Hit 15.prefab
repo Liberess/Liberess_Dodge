@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4642587146103388}
   - component: {fileID: 198597637061992146}
   - component: {fileID: 199323665128154162}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: FlashCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 4833283666961636}
   - component: {fileID: 198209739157370202}
   - component: {fileID: 199060432941441554}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9635,7 +9635,7 @@ GameObject:
   - component: {fileID: 4379626110081106}
   - component: {fileID: 198999961742457128}
   - component: {fileID: 199661357798331224}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flashes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14447,7 +14447,7 @@ GameObject:
   - component: {fileID: 4545169483439364}
   - component: {fileID: 198388923695078446}
   - component: {fileID: 199905207878438536}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19268,7 +19268,7 @@ GameObject:
   - component: {fileID: 4349941132539230}
   - component: {fileID: 198489008728736154}
   - component: {fileID: 199216345068774532}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24080,7 +24080,7 @@ GameObject:
   - component: {fileID: 4471685943653992}
   - component: {fileID: 198445258283279216}
   - component: {fileID: 199582464399494714}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hit 15
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class BulletSpawner : MonoBehaviour
 {
     public static BulletSpawner Instance;
-    public HpBar hpBar;
+    //public HpBar hpBar;
 
     private bool isShot;
     public bool isMove;
@@ -45,14 +45,14 @@ public class BulletSpawner : MonoBehaviour
         if (health <= 0)
         {
             GameManager2.Instance.spawnerList.Remove(gameObject);
-            transform.parent.GetComponent<Enemy>().IsDestroy();
+            transform.parent.GetComponent<MonsterParent>().IsDestroy();
             //Destroy(gameObject);
         }
 
-        if (PlayerCtrl.Instance.health <= 0)
+        /* if (dataMgr.gameData.health <= 0)
         {
             isShot = false;
-        }
+        } */
 
         Shot();
     }
@@ -77,10 +77,10 @@ public class BulletSpawner : MonoBehaviour
         }
     }
 
-    public void Hit(int _damage)
+    public  void Hit(int _damage)
     {
         health -= _damage;
-        hpBar.SetHp(health);
+        //hpBar.SetHp(health);
 
         GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
 

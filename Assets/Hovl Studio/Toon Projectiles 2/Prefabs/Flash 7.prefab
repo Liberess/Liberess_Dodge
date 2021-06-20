@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4351861067188544}
   - component: {fileID: 198633133399222328}
   - component: {fileID: 199443871673672118}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4833,7 +4833,7 @@ GameObject:
   - component: {fileID: 4317367250135540}
   - component: {fileID: 198257264138182866}
   - component: {fileID: 199125534909586788}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShockWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}

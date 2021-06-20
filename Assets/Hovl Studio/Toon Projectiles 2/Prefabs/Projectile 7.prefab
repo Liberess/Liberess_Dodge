@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4546150717060384}
   - component: {fileID: 198279653074507688}
   - component: {fileID: 199987067447877200}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShockWave3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 4798680023604356}
   - component: {fileID: 198772216588664966}
   - component: {fileID: 199779993742728334}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9648,7 +9648,7 @@ GameObject:
   - component: {fileID: 108994128628677702}
   - component: {fileID: 54589532502053854}
   - component: {fileID: 135880312642943706}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Projectile 7
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}

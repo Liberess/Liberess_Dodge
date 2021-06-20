@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 198487867531459058}
   - component: {fileID: 199352014713688920}
   - component: {fileID: 114407893265485702}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flares
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4791,7 +4791,7 @@ GameObject:
   - component: {fileID: 199846976914066808}
   - component: {fileID: 54886916964080914}
   - component: {fileID: 135999672022334354}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Projectile 12
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}

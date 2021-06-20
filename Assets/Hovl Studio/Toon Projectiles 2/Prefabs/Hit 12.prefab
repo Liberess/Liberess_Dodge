@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4187283139949972}
   - component: {fileID: 198054827527708672}
   - component: {fileID: 199634828739053284}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 4370028569082690}
   - component: {fileID: 198467240487745042}
   - component: {fileID: 199744169848921466}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Leaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9653,7 +9653,7 @@ GameObject:
   - component: {fileID: 4810706718413296}
   - component: {fileID: 198925281035012992}
   - component: {fileID: 199218832780788844}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShockWave
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14465,7 +14465,7 @@ GameObject:
   - component: {fileID: 4735696976062142}
   - component: {fileID: 198121164693471286}
   - component: {fileID: 199850375479008138}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Berries
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19286,7 +19286,7 @@ GameObject:
   - component: {fileID: 4187756640563938}
   - component: {fileID: 198374738241482008}
   - component: {fileID: 199631615663477538}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24098,7 +24098,7 @@ GameObject:
   - component: {fileID: 4096249264326354}
   - component: {fileID: 198511623096506314}
   - component: {fileID: 199396197189864260}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28919,7 +28919,7 @@ GameObject:
   - component: {fileID: 4487094943003650}
   - component: {fileID: 198049116482983366}
   - component: {fileID: 199163146825562262}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flares
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33758,7 +33758,7 @@ GameObject:
   - component: {fileID: 4439259828602862}
   - component: {fileID: 198763724945014022}
   - component: {fileID: 199706269167652862}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hit 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}

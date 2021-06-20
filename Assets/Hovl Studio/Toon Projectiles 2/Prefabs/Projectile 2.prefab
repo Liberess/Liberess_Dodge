@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4819818843720310}
   - component: {fileID: 198316187487270594}
   - component: {fileID: 199901496000089600}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BorderLightning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4765,7 +4765,7 @@ GameObject:
   - component: {fileID: 4472473557064494}
   - component: {fileID: 198207720701571386}
   - component: {fileID: 199629377902509242}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Darkness
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9581,7 +9581,7 @@ GameObject:
   - component: {fileID: 108556751418608030}
   - component: {fileID: 54917258164921374}
   - component: {fileID: 135262430962562618}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Projectile 2
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
@@ -14505,7 +14505,7 @@ GameObject:
   - component: {fileID: 4145045361821176}
   - component: {fileID: 198831507450239270}
   - component: {fileID: 199100726335174730}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Borders
   m_TagString: Untagged
   m_Icon: {fileID: 0}

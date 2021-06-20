@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4826920894054170}
   - component: {fileID: 198577314549268626}
   - component: {fileID: 199639248363183104}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash 12
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4827,7 +4827,7 @@ GameObject:
   - component: {fileID: 4744645847661584}
   - component: {fileID: 198635183359767414}
   - component: {fileID: 199298047366692870}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9648,7 +9648,7 @@ GameObject:
   - component: {fileID: 4430488215967852}
   - component: {fileID: 198194528528775188}
   - component: {fileID: 199803355616116554}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14469,7 +14469,7 @@ GameObject:
   - component: {fileID: 4858298464731046}
   - component: {fileID: 198681563191839366}
   - component: {fileID: 199648756326084700}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Leaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19290,7 +19290,7 @@ GameObject:
   - component: {fileID: 4331206238352388}
   - component: {fileID: 198056594617319446}
   - component: {fileID: 199835579446165342}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Berries
   m_TagString: Untagged
   m_Icon: {fileID: 0}

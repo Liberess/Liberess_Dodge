@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4452000282636966}
   - component: {fileID: 198911244384714508}
   - component: {fileID: 199482711437897920}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash 9
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4824,7 +4824,7 @@ GameObject:
   - component: {fileID: 4150379819173740}
   - component: {fileID: 198374481388203928}
   - component: {fileID: 199796077552637486}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}

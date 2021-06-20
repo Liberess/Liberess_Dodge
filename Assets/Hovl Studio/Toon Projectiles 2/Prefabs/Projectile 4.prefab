@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 198009793095535290}
   - component: {fileID: 114120524188537870}
   - component: {fileID: 199378539877024704}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4791,7 +4791,7 @@ GameObject:
   - component: {fileID: 108488655433331256}
   - component: {fileID: 54562278206498944}
   - component: {fileID: 135998222679351976}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Projectile 4
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}

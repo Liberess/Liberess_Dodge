@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4761509187481228}
   - component: {fileID: 198818419059140704}
   - component: {fileID: 199145244871356446}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cubes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4775,7 +4775,7 @@ GameObject:
   - component: {fileID: 198819491005447586}
   - component: {fileID: 199738349537671464}
   - component: {fileID: 114909474190687334}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Triangles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9555,7 +9555,7 @@ GameObject:
   - component: {fileID: 108416085333391600}
   - component: {fileID: 54351105455091520}
   - component: {fileID: 135893854351048510}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Projectile 3
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}

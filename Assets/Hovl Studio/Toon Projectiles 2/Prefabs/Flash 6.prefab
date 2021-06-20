@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4514730505716394}
   - component: {fileID: 198011077953338982}
   - component: {fileID: 199956872325072172}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4833,7 +4833,7 @@ GameObject:
   - component: {fileID: 4815118260320022}
   - component: {fileID: 198795156276314486}
   - component: {fileID: 199882796335232020}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}

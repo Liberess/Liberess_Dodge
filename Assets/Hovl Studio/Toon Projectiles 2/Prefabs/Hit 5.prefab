@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4152785550773110}
   - component: {fileID: 198197224863303540}
   - component: {fileID: 199687478211454980}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 4802396305469876}
   - component: {fileID: 198585291303222964}
   - component: {fileID: 199378010490001030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9644,7 +9644,7 @@ GameObject:
   - component: {fileID: 4390551390361438}
   - component: {fileID: 198793130950689596}
   - component: {fileID: 199812305212469060}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14456,7 +14456,7 @@ GameObject:
   - component: {fileID: 4677203946966664}
   - component: {fileID: 198394484108753570}
   - component: {fileID: 199867068561322912}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19268,7 +19268,7 @@ GameObject:
   - component: {fileID: 4601403372855124}
   - component: {fileID: 198642663463864492}
   - component: {fileID: 199961559915633642}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Hit 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}

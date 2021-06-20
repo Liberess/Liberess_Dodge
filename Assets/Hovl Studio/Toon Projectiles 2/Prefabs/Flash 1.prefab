@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4205697589028422}
   - component: {fileID: 198141734499153464}
   - component: {fileID: 199901513864036716}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4845,7 +4845,7 @@ GameObject:
   - component: {fileID: 4226333400797648}
   - component: {fileID: 198285706730272176}
   - component: {fileID: 199826478109930874}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Debris
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9666,7 +9666,7 @@ GameObject:
   - component: {fileID: 4996657374816036}
   - component: {fileID: 198413484023830526}
   - component: {fileID: 199033728825743292}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Trails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14478,7 +14478,7 @@ GameObject:
   - component: {fileID: 4261893358518464}
   - component: {fileID: 198303409600503452}
   - component: {fileID: 199795065713051632}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sparks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19299,7 +19299,7 @@ GameObject:
   - component: {fileID: 4913417059762556}
   - component: {fileID: 198540567024222044}
   - component: {fileID: 199682777275871952}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4684737960746234}
   - component: {fileID: 198447726614856880}
   - component: {fileID: 199738323929166582}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4833,7 +4833,7 @@ GameObject:
   - component: {fileID: 4084464453601170}
   - component: {fileID: 198856664133044178}
   - component: {fileID: 199930829537096064}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

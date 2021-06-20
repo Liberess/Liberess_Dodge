@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4995698546635292}
   - component: {fileID: 198504105017241384}
   - component: {fileID: 199156923139498442}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Glow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 4742835330165936}
   - component: {fileID: 198299242200965888}
   - component: {fileID: 199334372415170354}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9662,7 +9662,7 @@ GameObject:
   - component: {fileID: 4196866371525134}
   - component: {fileID: 198434717618676924}
   - component: {fileID: 199620226965064596}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Flash 11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14495,7 +14495,7 @@ GameObject:
   - component: {fileID: 4709581278439918}
   - component: {fileID: 198210338359006228}
   - component: {fileID: 199838965572145218}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
