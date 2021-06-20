@@ -4,14 +4,8 @@ using UnityEngine;
 
 public abstract class Bullet : MonoBehaviour
 {
-    protected int damage = 3;
-    protected float moveSpeed = 12f;
-
-    protected void Start()
-    {
-        damage *= GameManager3.Instance.buildIndex + 5;
-        Destroy(gameObject, 3f);
-    }
+    public int damage = 2;
+    public float moveSpeed = 20f;
 
     protected void Update() => Move();
 

@@ -8,7 +8,8 @@ public enum MonsType
     Slime = 1,
     TurtleShell,
     Beholder,
-    Chest
+    Chest,
+    Boss
 }
 
 public abstract class Monster : MonoBehaviour
@@ -61,11 +62,11 @@ public abstract class Monster : MonoBehaviour
             hpBar.currentHp = health;
             //hpBar.SetHp(health);
 
+            SoundManager.Instance.PlaySFX("MonsterHit");
+
             if (health > 0)
             {
                 anim.SetTrigger("doHit");
-                GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
-                Destroy(blood, 1f);
             }
             else
             {
@@ -74,7 +75,14 @@ public abstract class Monster : MonoBehaviour
                 rigid.velocity = Vector3.zero;
                 gameObject.layer = 10;
                 anim.SetTrigger("doDie");
+                SoundManager.Instance.PlaySFX("MonsterDie");
                 Invoke("Die", 1f);
+            }
+
+            if (monsType != MonsType.Boss)
+            {
+                GameObject blood = Instantiate(Resources.Load<GameObject>("Particles/Blood"), transform.position, Quaternion.identity);
+                Destroy(blood, 1f);
             }
         }
     }
@@ -87,7 +95,16 @@ public abstract class Monster : MonoBehaviour
             {
                 attackTimer = 0f;
 
-                anim.SetTrigger("doAttack");
+                if(monsType == MonsType.Boss)
+                {
+                    StartCoroutine(BossMonster.Instance.AttackAI());
+                    //anim.SetTrigger("doMulti");
+                    //StartCoroutine(BossMonster.Instance.MultiShot());
+                }
+                else
+                {
+                    anim.SetTrigger("doAttack");
+                }
 
                 attackRate = Random.Range(attackRateMin, attackRateMax);
             }
@@ -96,9 +113,23 @@ public abstract class Monster : MonoBehaviour
 
     protected void Die()
     {
-        GameManager3.Instance.monsterList.Remove(transform.parent.gameObject);
-        GameManager3.Instance.monsterList.Remove(gameObject);
-        GameManager3.Instance.InspectMonsList();
-        transform.parent.GetComponent<MonsterParent>().IsDestroy();
+        if(monsType != MonsType.Boss)
+        {
+            GameManager3.Instance.monsterList.Remove(transform.parent.gameObject);
+            GameManager3.Instance.monsterList.Remove(gameObject);
+            GameManager3.Instance.InspectMonsList();
+            transform.parent.GetComponent<MonsterParent>().IsDestroy();
+        }
+        else
+        {
+            for (int i = 0; i < GameManager3.Instance.monsterList.Count; i++)
+            {
+                if(GameManager3.Instance.monsterList[i] != gameObject)
+                    Destroy(GameManager3.Instance.monsterList[i]);
+            }
+
+            GameManager3.Instance.monsterList.Clear();
+            GameManager3.Instance.InspectMonsList();
+        }
     }
 }

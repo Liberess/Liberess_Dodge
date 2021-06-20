@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class bl_UCrosshair : MonoBehaviour
 {
-
     [Header("Settings")]
     [Range(1,10)]public float ScaleLerp = 5;
     [Range(0.1f, 5)] public float RotationSpeed = 2;
@@ -65,9 +64,6 @@ public class bl_UCrosshair : MonoBehaviour
         if (HideMouseCursor) { Cursor.visible = false; }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     private void Update()
     {
         if (GetCrosshair.isStatic)
@@ -79,11 +75,6 @@ public class bl_UCrosshair : MonoBehaviour
         RaycastControll();
     }
 
-
-
-    /// <summary>
-    /// 
-    /// </summary>
     void FollowMouseControll()
     {
         if (RootContent == null)
@@ -94,9 +85,6 @@ public class bl_UCrosshair : MonoBehaviour
         RootContent.position = bl_UCrosshairUtils.GetMousePosition(m_Canvas);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     void ScaleContent()
     {
         if (RootContent == null)
@@ -106,9 +94,6 @@ public class bl_UCrosshair : MonoBehaviour
         RootContent.sizeDelta = Vector2.Lerp(RootContent.sizeDelta, target, Time.unscaledDeltaTime * ScaleLerp);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     void Rotate()
     {
         if (!RotateCrosshair)
@@ -119,9 +104,6 @@ public class bl_UCrosshair : MonoBehaviour
         RootContent.Rotate(Vector3.forward * RotationSpeed);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     void RaycastControll()
     {
         if (!useDetection)
@@ -144,9 +126,6 @@ public class bl_UCrosshair : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public void Change(int id)
     {
         if (id <= Crosshairs.Length - 1)
@@ -162,9 +141,6 @@ public class bl_UCrosshair : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public void OnFire()
     {
         if (RootContent == null)
@@ -178,9 +154,6 @@ public class bl_UCrosshair : MonoBehaviour
         lastTimeFire = Time.time + OnFireScaleRate;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public void OnAim(bool aim)
     {
         if (RootContent == null)
@@ -191,9 +164,6 @@ public class bl_UCrosshair : MonoBehaviour
         isAim = aim;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public void OnHit()
     {
         if (HitMarkerRoot == null)
@@ -203,25 +173,16 @@ public class bl_UCrosshair : MonoBehaviour
         StartCoroutine("OnHitMarker");
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public void SetColor(Color c)
     {
         GetCrosshair.SetColor(c, ColorTransitionDuration);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public void SetDefaultColors()
     {
         GetCrosshair.SetDefaultColors(ColorTransitionDuration);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public void Reset()
     {
         RootContent.sizeDelta = new Vector2(GetCrosshair.NormalScaleAmount, GetCrosshair.NormalScaleAmount);
@@ -229,9 +190,6 @@ public class bl_UCrosshair : MonoBehaviour
         RootContent.eulerAngles = InitialRotation;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public bl_UCrosshairInfo GetCrosshair
     {
         get
@@ -240,10 +198,6 @@ public class bl_UCrosshair : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <returns></returns>
     IEnumerator OnHitMarker()
     {
         hitDuration = 0;

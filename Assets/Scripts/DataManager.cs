@@ -76,13 +76,10 @@ public class DataManager : MonoBehaviour
 
     public void ResetGame()
     {
-        gameData.sfx = 1f;
-        gameData.bgm = 1f;
-
         gameData.atkCount = 0;
 
         gameData.atk = 5f;
-        gameData.moveSpeed = 5f;
+        gameData.moveSpeed = 7f;
         gameData.health = 100f;
         gameData.maxHealth = 100f;
         gameData.shotDelayTime = 1f;
@@ -104,6 +101,9 @@ public class DataManager : MonoBehaviour
         {
             _gameData = new GameData();
             File.Create(Application.persistentDataPath + GameDataFileName);
+
+            gameData.sfx = 1f;
+            gameData.bgm = 1f;
 
             ResetGame();
         }

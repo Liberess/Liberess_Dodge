@@ -92,7 +92,8 @@ public class DemoShooting : MonoBehaviour
 
     public void Shot()
     {
-        Instantiate(Prefabs[Prefab], FirePoint.transform.position, FirePoint.transform.rotation);
+        GameObject bullet = Instantiate(Prefabs[Prefab], FirePoint.transform.position, FirePoint.transform.rotation);
+        Destroy(bullet, 3f);
     }
 
     // To change prefabs (count - prefab number)

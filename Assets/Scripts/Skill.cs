@@ -38,17 +38,16 @@ public class Skill : MonoBehaviour
     {
         switch(type)
         {
-            case SkillType.Atk: DataManager.Instance.gameData.atk += 2f; break;
-            case SkillType.ShotSpeed: DataManager.Instance.gameData.shotDelayTime -= 0.5f; break;
+            case SkillType.Atk: DataManager.Instance.gameData.atk += 4f; break;
+            case SkillType.ShotSpeed: DataManager.Instance.gameData.shotDelayTime -= 0.4f; break;
             case SkillType.MoveSpeed: DataManager.Instance.gameData.moveSpeed += 0.5f; break;
-            case SkillType.Health: DataManager.Instance.gameData.maxHealth += 100f; break;
+            case SkillType.Health: DataManager.Instance.gameData.maxHealth += 150f; PlayerHpBar.Instance.SetHp(); break;
             case SkillType.Double: DataManager.Instance.gameData.atkCount++; break;
         }
 
         CamFollow.Instance.isPlayer = true;
         PlayerCtrl.Instance.isMove = true;
         PlayerCtrl.Instance.isShot = true;
-        PlayerCtrl.Instance.LevelUp();
 
         GameObject.Find("GameCanvas").transform.Find("Skill Group").gameObject.SetActive(false);
     }

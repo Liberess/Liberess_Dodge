@@ -167,6 +167,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2240549156650200250, guid: 6f5f366fe49342d40a23d37c5d4e87d1,
+        type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2723631803973551616, guid: 6f5f366fe49342d40a23d37c5d4e87d1,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -402,6 +407,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6577029792608389772, guid: 55776efecb0cd134ea5f418c2f97a705,
         type: 3}
+      propertyPath: m_Speed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6577029792608389772, guid: 55776efecb0cd134ea5f418c2f97a705,
+        type: 3}
       propertyPath: m_WalkableMask
       value: 7
       objectReference: {fileID: 0}
@@ -418,7 +428,7 @@ PrefabInstance:
     - target: {fileID: 6577029792608389775, guid: 55776efecb0cd134ea5f418c2f97a705,
         type: 3}
       propertyPath: m_IsKinematic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55776efecb0cd134ea5f418c2f97a705, type: 3}

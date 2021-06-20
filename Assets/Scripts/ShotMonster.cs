@@ -14,16 +14,17 @@ public class ShotMonster : Monster
         attackRateMin = 1f;
         attackRateMax = 3f;
 
-        attackRate = 3f;
         attackTimer = 0f;
 
-        int temp = (10 * GameManager3.Instance.buildIndex * (int)monsType) / 3;
+        int temp = (9 * GameManager3.Instance.buildIndex * (int)monsType) / 3;
 
-        int randHp = (int)Random.Range(temp * 0.5f, temp * 1.5f);
+        int randHp = (int)Random.Range(temp * 0.5f, temp * 1.2f);
         m_health = randHp;
 
         hpBar.maxHp = health;
         hpBar.currentHp = health;
+
+        attackRate = Random.Range(attackRateMin, attackRateMax);
 
         target = FindObjectOfType<PlayerCtrl>().transform;
         navAgent = GetComponent<NavMeshAgent>();
@@ -41,7 +42,7 @@ public class ShotMonster : Monster
 
     private void FixedUpdate()
     {
-        if (isAlive)
+        if (isAlive && GameManager3.Instance.isPlay)
         {
             float distance = Vector3.Distance(target.position, transform.position);
             transform.LookAt(target.position);
@@ -60,11 +61,18 @@ public class ShotMonster : Monster
                 Attack();
             }
         }
+        else
+        {
+            isAttack = false;
+            navAgent.isStopped = true;
+        }
     }
 
     private void Shooting()
     {
+        SoundManager.Instance.PlaySFX("ShotAttack");
         GameObject bullet = Instantiate(Resources.Load<GameObject>("EnemyBullet"), bulletPos.position, transform.rotation);
+        bullet.GetComponent<MonsterBullet>().isBoss = false;
         bullet.transform.LookAt(target);
     }
 

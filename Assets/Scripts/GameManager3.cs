@@ -8,6 +8,9 @@ public class GameManager3 : MonoBehaviour
 {
     public static GameManager3 Instance;
 
+    [SerializeField]
+    private Transform[] spawnPos;
+
     public Text stageTxt;
     public Text monsTxt;
 
@@ -18,9 +21,12 @@ public class GameManager3 : MonoBehaviour
 
     public bool isPlay;
     public bool isGameOver;
+    public bool isBoss;
 
     public int buildIndex;
     private int monsCount;
+
+    public string[] monsName = { "Monsters/SlimeMob", "Monsters/TurtleShellMob", "Monsters/BeholderMob", "Monsters/ChestMob" };
 
     private void Awake() => Instance = this;
 
@@ -28,29 +34,45 @@ public class GameManager3 : MonoBehaviour
     {
         buildIndex = SceneManager.GetActiveScene().buildIndex;
 
-        if (buildIndex > 0) //Main 이상
+        if (buildIndex > 0 && buildIndex < 6) //Main 초과 End 미만
         {
             Time.timeScale = 1;
 
-            isPlay = true;
+            isPlay = false;
+            isBoss = false;
             isGameOver = false;
 
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Monster");
-
-            for (int i = 0; i < enemies.Length; i++)
-                monsterList.Add(enemies[i]);
-
-            monsCount = monsterList.Count / 2;
+            if (buildIndex < 5)
+            {
+                StartCoroutine(MonsterSpawn());
+                StartCoroutine(CreateCureItem());
+            }
+            else
+            {
+                isBoss = true;
+            }
 
             stageTxt.text = "스테이지 " + buildIndex;
 
+            if(buildIndex == 1)
+            {
+                DataManager.Instance.ResetGame();
+            }
+
             PlayerHpBar.Instance.SetHp();
         }
+
+        if(buildIndex == 6) //End
+        {
+            Cursor.visible = true;
+        }
+
+        SoundManager.Instance.PlayBGM(SceneManager.GetActiveScene().name);
     }
 
     private void Update()
     {
-        if (buildIndex > 0)
+        if (buildIndex > 0 && buildIndex < 6)
         {
             if (!isGameOver)
             {
@@ -58,19 +80,83 @@ public class GameManager3 : MonoBehaviour
                 {
                     if (gameStopPanel.activeSelf)
                     {
-                        isPlay = true;
+                        Cursor.visible = false;
                         gameStopPanel.SetActive(false);
                     }
                     else
                     {
-                        isPlay = false;
+                        Cursor.visible = true;
                         gameStopPanel.SetActive(true);
                     }
                 }
 
                 monsTxt.text = "남은 적 : " + (monsterList.Count / 2) + "/" + monsCount;
             }
+            else
+            {
+                if(Input.anyKeyDown)
+                {
+                    Cursor.visible = true;
+                    Michsky.LSS.LoadingScreenManager.Instance.LoadScene("Main");
+                }
+            }
         }
+        else
+        {
+            if (Input.GetButtonDown("Cancel"))
+            {
+                if (gameStopPanel.activeSelf)
+                {
+                    Cursor.visible = false;
+                    gameStopPanel.SetActive(false);
+                }
+                else
+                {
+                    Cursor.visible = true;
+                    gameStopPanel.SetActive(true);
+                }
+            }
+        }
+    }
+
+    IEnumerator MonsterSpawn()
+    {
+        for(int i = 0; i < spawnPos.Length; i++)
+        {
+            GameObject particle = Instantiate(Resources.Load<GameObject>("Particles/Spawn"), spawnPos[i].position, Quaternion.identity);
+            Destroy(particle, 1.5f);
+
+            yield return new WaitForSeconds(0.5f - (buildIndex * 0.15f));
+
+            int rand = 0;
+
+            switch(buildIndex)
+            {
+                case 1:
+                    rand = Random.Range(0, 1); //Slime
+                    break;
+                case 2:
+                    rand = Random.Range(0, 2); //Slime ~ Turtle
+                    break;
+                case 3:
+                    rand = Random.Range(0, 3); //Slime ~ Beholder
+                    break;
+                case 4:
+                    rand = Random.Range(0, 4); //Slime ~ Chest
+                    break;
+            }
+
+            Instantiate(Resources.Load(monsName[rand]), spawnPos[i].position, Quaternion.identity);
+
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Monster");
+
+        for (int i = 0; i < enemies.Length; i++)
+            monsterList.Add(enemies[i]);
+
+        monsCount = monsterList.Count / 2;
     }
 
     public void InspectMonsList()
@@ -89,43 +175,54 @@ public class GameManager3 : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         GameObject.Find("Door").GetComponent<Animator>().SetTrigger("doOpen");
+        SoundManager.Instance.PlaySFX("Clear");
 
         yield return new WaitForSeconds(2.5f);
 
-        GameObject.Find("GameCanvas").transform.Find("Skill Group").gameObject.SetActive(true);
+        if(buildIndex < 5)
+        {
+            GameObject.Find("GameCanvas").transform.Find("Skill Group").gameObject.SetActive(true);
+        }
+        else
+        {
+            CamFollow.Instance.isPlayer = true;
+            PlayerCtrl.Instance.isMove = true;
+            PlayerCtrl.Instance.isShot = true;
+        }
+    }
+
+    IEnumerator CreateCureItem()
+    {
+        yield return new WaitForSeconds(10f);
+
+        Item item = FindObjectOfType<Item>();
+
+        if (item == null)
+        {
+            int rand = Random.Range(0, 101);
+
+            if (rand <= 30)
+            {
+                int randPos = Random.Range(0, spawnPos.Length);
+                Instantiate(Resources.Load<GameObject>("CureItem"),
+                    new Vector3(spawnPos[randPos].position.x, spawnPos[randPos].position.y + 1f), Quaternion.identity);
+            }
+        }
+
+        StartCoroutine(CreateCureItem());
     }
 
     public void NextStage()
     {
-        Michsky.LSS.LoadingScreenManager.Instance.LoadScene("Level_" + (buildIndex + 1));
+        if(buildIndex < 5)
+        {
+            Michsky.LSS.LoadingScreenManager.Instance.LoadScene("Level_" + (buildIndex + 1));
+        }
+        else
+        {
+            Michsky.LSS.LoadingScreenManager.Instance.LoadScene("End");
+        }
     }
-
-    public void CreateHpItem(Vector2 pos) => Instantiate(Resources.Load<GameObject>("HpItem"), pos, Quaternion.identity);
-
-    /* private void TimeUnitChange(Text txt, string str, float time)
-    {
-        minute = (int)time / 60;
-        hour = minute / 60;
-        second = (int)time % 60;
-        minute %= 60;
-
-        if (hour > 0 && minute > 0) //시간 분 초
-        {
-            txt.text = str + hour + "시간 " + minute + "분 " + second + "초";
-        }
-        else if (hour > 0 && minute <= 0) //시간 초
-        {
-            txt.text = str + hour + "시간 " + second + "초";
-        }
-        else if (hour <= 0 && minute > 0) //분 초
-        {
-            txt.text = str + minute + "분 " + second + "초";
-        }
-        else if (hour <= 0 && minute <= 0) //초
-        {
-            txt.text = str + second + "초";
-        }
-    } */
 
     public void EndGame()
     {

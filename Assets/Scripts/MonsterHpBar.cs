@@ -26,7 +26,9 @@ public class MonsterHpBar : MonoBehaviour
         if (currentHp <= 0)
             Destroy(gameObject);
 
-        transform.position = target.position;
+        if(target != null)
+            transform.position = target.position;
+
         hpBar.value = Mathf.Lerp(hpBar.value, currentHp / maxHp, Time.deltaTime * 5f);
 
         if(hit)

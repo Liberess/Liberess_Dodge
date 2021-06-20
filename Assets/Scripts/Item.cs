@@ -8,7 +8,7 @@ public class Item : MonoBehaviour
 
     private void Update()
     {
-        transform.Rotate(0f, 15f * Time.deltaTime, 0f);
+        transform.Rotate(0f, 30f * Time.deltaTime, 0f);
     }
 
     private void OnTriggerEnter(Collider other)

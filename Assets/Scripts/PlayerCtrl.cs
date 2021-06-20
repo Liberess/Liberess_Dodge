@@ -57,7 +57,7 @@ public class PlayerCtrl : MonoBehaviour
 
     private void Move()
     {
-        if (isMove && isAlive)
+        if (isMove && isAlive && GameManager3.Instance.isPlay)
         {
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
@@ -80,24 +80,27 @@ public class PlayerCtrl : MonoBehaviour
 
     private void MousePocus()
     {
-        if (!isMiddle && isAlive)
+        if (!isMiddle && isAlive && GameManager3.Instance.isPlay && !GameManager3.Instance.gameStopPanel.activeSelf)
         {
-            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
-
             float rayLength;
+            Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Plane groupPlane = new Plane(Vector3.up, Vector3.zero);
 
             if (groupPlane.Raycast(camRay, out rayLength))
             {
                 pointToLook = camRay.GetPoint(rayLength);
-                transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
+                transform.LookAt(pointToLook);
             }
         }
     }
 
     public void GetHeal(int _heal)
     {
+        SoundManager.Instance.PlaySFX("Cure");
+
+        GameObject cure = Instantiate(Resources.Load<GameObject>("Particles/Cure"), transform.position, Quaternion.identity);
+        Destroy(cure, 1f);
+
         dataMgr.gameData.health += _heal;
 
         if (dataMgr.gameData.health >= dataMgr.gameData.maxHealth)
@@ -107,13 +110,6 @@ public class PlayerCtrl : MonoBehaviour
 
         //HpBar.Instance.SetHp(health);
         PlayerHpBar.Instance.currentHp = dataMgr.gameData.health;
-    }
-
-    public void LevelUp()
-    {
-        dataMgr.gameData.health = (int)dataMgr.gameData.maxHealth;
-        
-        PlayerHpBar.Instance.SetHp();
     }
 
     public void Hit(int _damage)
@@ -129,13 +125,13 @@ public class PlayerCtrl : MonoBehaviour
 
             Destroy(blood, 1f);
 
-            StartCoroutine(NoDamage());
+            SoundManager.Instance.PlaySFX("PlayerHit");
         }
     }
 
     private void Shot()
     {
-        if (shotTime >= dataMgr.gameData.shotDelayTime && isAlive && isShot)
+        if (shotTime >= dataMgr.gameData.shotDelayTime && isAlive && isShot && GameManager3.Instance.isPlay)
         {
             if (Input.GetButtonDown("Fire1"))
             {
@@ -148,9 +144,9 @@ public class PlayerCtrl : MonoBehaviour
                 }
                 else
                 {
+                    SoundManager.Instance.PlaySFX("PlayerShot");
                     GetComponent<DemoShooting>().Shot();
                 }
-
                 //GameObject bullet = Instantiate(Resources.Load<GameObject>("PlayerBullet"), gun.transform.position, Quaternion.identity);
                 //bullet.transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
             }
@@ -168,6 +164,7 @@ public class PlayerCtrl : MonoBehaviour
         while(i <= dataMgr.gameData.atkCount)
         {
             i++;
+            SoundManager.Instance.PlaySFX("PlayerShot");
             GetComponent<DemoShooting>().Shot();
             yield return new WaitForSeconds(0.2f);
         }
@@ -177,7 +174,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         isNoDmg = true;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         isNoDmg = false;
     }
@@ -190,6 +187,7 @@ public class PlayerCtrl : MonoBehaviour
         dataMgr.gameData.health = 0f;
 
         anim.SetTrigger("doDie");
+        SoundManager.Instance.PlaySFX("PlayerDie");
 
         GameManager3.Instance.EndGame();
     }

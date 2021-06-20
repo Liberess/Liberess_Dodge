@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class NearMonster : Monster
 {
-    private int damage = 1;
+    private int damage = 3;
 
     private void Start()
     {
@@ -16,16 +16,17 @@ public class NearMonster : Monster
         attackRateMin = 1f;
         attackRateMax = 3f;
 
-        attackRate = 3f;
         attackTimer = 0f;
 
-        int temp = 10 * GameManager3.Instance.buildIndex * (int)monsType;
+        int temp = 7 * GameManager3.Instance.buildIndex * (int)monsType;
 
-        int randHp = (int)Random.Range(temp * 0.5f, temp * 1.5f);
+        int randHp = (int)Random.Range(temp * 0.5f, temp * 1.2f);
         m_health = randHp;
 
         hpBar.maxHp = health;
         hpBar.currentHp = health;
+
+        attackRate = Random.Range(attackRateMin, attackRateMax);
 
         target = FindObjectOfType<PlayerCtrl>().transform;
         navAgent = GetComponent<NavMeshAgent>();
@@ -43,7 +44,7 @@ public class NearMonster : Monster
 
     private void FixedUpdate()
     {
-        if(isAlive)
+        if(isAlive && GameManager3.Instance.isPlay)
         {
             float distance = Vector3.Distance(target.position, transform.position);
             transform.LookAt(target.position);
@@ -62,11 +63,16 @@ public class NearMonster : Monster
                 anim.SetBool("isMove", false);
             }
         }
+        else
+        {
+            isAttack = false;
+            navAgent.isStopped = true;
+        }
     }
 
     private void MyAttack()
     {
-        Debug.Log(damage);
+        SoundManager.Instance.PlaySFX("NearAttack");
         PlayerCtrl.Instance.Hit(damage);
     }
 
